@@ -6,4 +6,4 @@ if name != 'Charles Dodgson' and num_days_since_jabberwock_sighted > SPEC['thres
     Reject_trip__request()
     Add_to_blacklist()
 
-
+val("open('1234')")

@@ -1,11 +1,16 @@
 import ast
 import argparse
+import sys
 
 
 class NodeVisitor(ast.NodeVisitor):
     def visit(self, node):
         method = 'visit_' + node.__class__.__name__
-        visitor = getattr(self, method)
+        try:
+            visitor = getattr(self, method)
+        except AttributeError:
+            print(f"{node.__class__} is not implemented")
+            sys.exit()
         return visitor(node)
 
     def generic_visit(self, node):
@@ -174,10 +179,6 @@ class NodeVisitor(ast.NodeVisitor):
         self.generic_visit(node)
         return node
 
-    def visit_Call(self, node):
-        self.generic_visit(node)
-        return node
-
     def visit_List(self, node):
         self.generic_visit(node)
         return node
@@ -191,10 +192,6 @@ class NodeVisitor(ast.NodeVisitor):
         return node
 
     def visit_Tuple(self, node):
-        self.generic_visit(node)
-        return node
-
-    def visit_Attribute(self, node):
         self.generic_visit(node)
         return node
 
