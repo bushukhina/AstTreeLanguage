@@ -1,0 +1,9 @@
+city = 'Daresbury'
+status='Active'
+SPEC={'threshold': 10}
+
+if name != 'Charles Dodgson' and num_days_since_jabberwock_sighted > SPEC['threshold'] and domain(email) == 'lewiscarroll.org':
+    Reject_trip__request()
+    Add_to_blacklist()
+
+
