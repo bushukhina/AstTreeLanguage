@@ -53,6 +53,10 @@ class NodeVisitor(ast.NodeVisitor):
         self.generic_visit(node)
         return node
 
+    def visit_Expression(self, node):
+        self.generic_visit(node)
+        return node
+
     def visit_BinOp(self, node):
         self.generic_visit(node)
         return node
@@ -211,6 +215,7 @@ if __name__ == "__main__":
     file = p.parse_args().file
     with open(file, "r") as source:
         tree = ast.parse(source.read())
+    # tree = ast.parse("2+2")
     NV = NodeVisitor()
     NV.visit(tree)
 
@@ -218,4 +223,5 @@ if __name__ == "__main__":
     # print(ast.dump(tree))
 
     # не скомпилируется. если есть перемнные, которые не проинициализировали
-    # exec(compile(source=tree, filename="<ast>", mode="exec"))
+
+    print((compile(source=tree, filename="<ast>", mode='exec')))
