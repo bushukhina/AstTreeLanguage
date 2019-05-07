@@ -21,6 +21,8 @@ class AstWrapper:
         glob_dict = {**g_dict, **d}
         try:
             exec(compile(source=self.tree, filename="<ast>", mode='exec'), glob_dict)
-        except TypeError:
-            print("Error on line", re.search('line (\d)', traceback.format_exc()).groups('0')[0])
-            print("Unknown name or function")
+        except TypeError as e:
+            lineno = re.search('line (\d)', traceback.format_exc()).groups('0')[0]
+            print(f'TypeError on {lineno} line. Message was: {e}')
+            import sys
+            sys.exit()
