@@ -1,5 +1,4 @@
 import ast
-import argparse
 import sys
 
 
@@ -158,6 +157,10 @@ class NodeVisitor(ast.NodeVisitor):
         self.generic_visit(node)
         return node
 
+    def visit_Call(self, node):
+        self.generic_visit(node)
+        return node
+
     def visit_If(self, node):
         self.generic_visit(node)
         return node
@@ -207,21 +210,10 @@ class NodeVisitor(ast.NodeVisitor):
         self.generic_visit(node)
         return node
 
+    def visit_Attribute(self, node):
+        self.generic_visit(node)
+        return node
 
-if __name__ == "__main__":
-    p = argparse.ArgumentParser()
-    p.add_argument('file', default='article_example.txt',
-                   help='filename with code written on this language')
-    file = p.parse_args().file
-    with open(file, "r") as source:
-        tree = ast.parse(source.read())
-    # tree = ast.parse("2+2")
-    NV = NodeVisitor()
-    NV.visit(tree)
-
-    # если, то раскоментировать, то выведет получившееся дерево
-    # print(ast.dump(tree))
-
-    # не скомпилируется. если есть перемнные, которые не проинициализировали
-
-    print((compile(source=tree, filename="<ast>", mode='exec')))
+    def visit_JoinedStr(self, node):
+        self.generic_visit(node)
+        return node

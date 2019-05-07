@@ -1,0 +1,10 @@
+for ord in orders:
+    drivers = find_driver(ord)
+    if len(drivers) ==0:
+        break
+    for driver in drivers:
+        if driver.car in police_list or driver.driver_id in police_list:
+            block(driver)
+        else:
+            driver.set_works()
+            ord.set_driver(driver)

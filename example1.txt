@@ -1,8 +1,0 @@
-city = "LA"
-status='Active'
-
-for client in wish_list:
-    if best_level(free_cars) < wish_list[client]:
-        ask_to_wait(client)
-    else:
-        set_new_trip(best_level(free_cars), client)
