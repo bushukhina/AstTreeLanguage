@@ -1,14 +1,17 @@
 import ast
 import sys
 
+#Attribute
 
 class NodeVisitor(ast.NodeVisitor):
     def visit(self, node):
         method = 'visit_' + node.__class__.__name__
         try:
             visitor = getattr(self, method)
-        except AttributeError:
+        except AttributeError as e:
             print(f"{node.__class__} is not implemented")
+            import traceback
+            print(traceback.print_exc())
             sys.exit()
         return visitor(node)
 
@@ -207,10 +210,6 @@ class NodeVisitor(ast.NodeVisitor):
         return node
 
     def visit_Index(self, node):
-        self.generic_visit(node)
-        return node
-
-    def visit_Attribute(self, node):
         self.generic_visit(node)
         return node
 

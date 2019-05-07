@@ -18,8 +18,9 @@ class TaxiOrder:
         self.address = address
         self.client = None
 
-    def set_driver(self, driver):
-        self.driver = driver
+    @staticmethod
+    def set_driver(ord, driver):
+        ord.driver = driver
 
 
 class Driver:
@@ -29,8 +30,17 @@ class Driver:
         self.car = car
         self.isFree = True
 
-    def set_works(self):
-        self.isFree = False
+    @staticmethod
+    def get_car(d):
+        return d.car
+
+    @staticmethod
+    def get_id(d):
+        return d.driver_id
+
+    @staticmethod
+    def set_works(d):
+        d.isFree = False
 
 
 def block(driver):
@@ -88,7 +98,11 @@ def main():
         "find_driver": find_driver,
         "police_list": police_list,
         "len": len,
-        "black_list": black_list
+        "black_list": black_list,
+        "get_car": Driver.get_car,
+        "get_id": Driver.get_id,
+        "set_works": Driver.set_works,
+        "set_driver": TaxiOrder.set_driver
     }
     AV.execute(global_var)
     print_curr_state()
